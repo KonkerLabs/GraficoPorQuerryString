@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link href="./css/c30.css" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript">
+  // Read a page's GET URL variables and return them as an associative array.
+  function getUrlVars()
+  {
+      var vars = [], hash;
+      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+      for(var i = 0; i < hashes.length; i++)
+      {
+          hash = hashes[i].split('=');
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+      }
+      return vars;
+  }
+
+    function montarQueryString(){
+      window.location.href='/grafico.html?' +
+      'urlsub=' + encodeURIComponent(document.getElementById('urlsub').value) + '&' +
+      'user=' + document.getElementById('user').value + '&' +
+      'senha=' + document.getElementById('senha').value + '&' +
+      'dado=' + document.getElementById('dado').value + '&' +
+      'unidade=' + encodeURIComponent(document.getElementById('unidade').value) + '&' +
+      'ini=' + encodeURIComponent(document.getElementById('ini').value) + '&' +
+      'fim=' + encodeURIComponent(document.getElementById('fim').value) + '&' +
+      'formato=' + encodeURIComponent(document.getElementById('formato').value);
+    }
+
+    function prencheForm(){
+      urlVars=getUrlVars();
+      if(urlVars["urlsub"]!=undefined){
+        document.getElementById('urlsub').value=decodeURIComponent(urlVars["urlsub"]);
+      }
+      if(urlVars["user"]!=undefined){
+        document.getElementById('user').value=urlVars["user"];
+      }
+      if(urlVars["senha"]!=undefined){
+        document.getElementById('senha').value=urlVars["senha"];
+      }
+      if(urlVars["dado"]!=undefined){
+        document.getElementById('dado').value=urlVars["dado"];
+      }
+      if(urlVars["unidade"]!=undefined){
+        document.getElementById('unidade').value=decodeURIComponent(urlVars["unidade"]);
+      }
+      if(urlVars["ini"]!=undefined){
+        document.getElementById('ini').value=decodeURIComponent(urlVars["ini"]);
+      }
+      if(urlVars["fim"]!=undefined){
+        document.getElementById('fim').value=decodeURIComponent(urlVars["fim"]);
+      }
+      if(urlVars["formato"]!=undefined){
+        document.getElementById('formato').value=decodeURIComponent(urlVars["formato"]);
+      }
+
+
+    }
+
+
+    window.onload = function () { prencheForm();}
+
+
+  </script>
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Gráfico</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Fontes -->
+      <link href="https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:300,400,700" rel="stylesheet">
+
+
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="./bower_components/c3/c3.js"></script>
+
+  </head>
+
+
+
+
+  <body>
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Gerar gráfico</h1>
+      </div>
+
+      <div class="row col-md-12">
+              <div class="painel col-xs-12 col-md-12">
+                  <div class="titulo-painel">
+                      <h3 id="titulo_painel"></h3>
+                      <label id="titulo-label"></label>
+                      <hr class="titulo-painel">
+                  </div>
+                  <div class="row col-md-12 infos">
+Url de Subscrição (com o canal): <input type="text" name="urslsub" id="urlsub" size="100"><br>
+User: <input type="text" name="user" id="user" size="15"><br>
+Senha: <input type="text" name="senha" id="senha" size="15"><br>
+Dado: <input type="text" name="dado" id="dado" size="15"><br>
+Unidade: <input type="text" name="unidade" id="unidade" size="15"><br>
+Inicio: <input type="text" name="ini" id="ini" size="15"><br>
+Fim: <input type="text" name="fim" id="fim" size="15"><br>
+Formato: <input type="text" name="formato" id="formato" size="20"><br>
+
+<input type="submit" value="Carregar"  onclick="montarQueryString();">
+
+                  </div>
+
+
+
+              </div>
+
+
+           </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+          <p class="text-muted">Powered by <a href="http://www.konkerlabs.com"><img src="img/konker-logo.png"></a></p>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
